@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIMLovers", "SIMLovers\SIMLovers.csproj", "{1CD291FE-A924-44BB-8182-1A3846A28D98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIMLovers", "SIMLovers\SIMLovers.csproj", "{1CD291FE-A924-44BB-8182-1A3846A28D98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIMLovers.Infrastructure", "SIMLovers.Infrastructure\SIMLovers.Infrastructure.csproj", "{9EF60EF4-3056-4CE4-AF19-73734A7C5068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SIMLovers.Infrastructure", "SIMLovers.Infrastructure\SIMLovers.Infrastructure.csproj", "{9EF60EF4-3056-4CE4-AF19-73734A7C5068}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIMLovers.Core", "SIMLovers.Core\SIMLovers.Core.csproj", "{76197B6A-15E1-40A1-A08B-723D6E7BED43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9EF60EF4-3056-4CE4-AF19-73734A7C5068}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EF60EF4-3056-4CE4-AF19-73734A7C5068}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EF60EF4-3056-4CE4-AF19-73734A7C5068}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76197B6A-15E1-40A1-A08B-723D6E7BED43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76197B6A-15E1-40A1-A08B-723D6E7BED43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76197B6A-15E1-40A1-A08B-723D6E7BED43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76197B6A-15E1-40A1-A08B-723D6E7BED43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
