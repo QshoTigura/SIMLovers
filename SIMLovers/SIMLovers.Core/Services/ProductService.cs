@@ -18,11 +18,11 @@ namespace SIMLovers.Core.Services
             _context = context;
         }
 
-        public bool Create(string productname, int brandId, int categoryId, string description, int torque, string style, string picture, int quantity, decimal price, decimal discount)
+        public bool Create(string name, int brandId, int categoryId, string description, int torque, string style, string picture, int quantity, decimal price, decimal discount)
         {
             Product item = new Product
             {
-                ProductName = productname,
+                ProductName = name,
                 Brand = _context.Brands.Find(brandId),
                 Category = _context.Categories.Find(categoryId),
                 Description = description,
@@ -78,14 +78,14 @@ namespace SIMLovers.Core.Services
             return _context.SaveChanges() != 0;
         }
 
-        public bool Update(int productId, string productname, int brandId, int categoryId, string description, int torque, string style, string picture, int quantity, decimal price, decimal discount)
+        public bool Update(int productId, string name, int brandId, int categoryId, string description, int torque, string style, string picture, int quantity, decimal price, decimal discount)
         {
             var product = GetProductById(productId);
             if (product == default(Product))
             {
                 return false;
             }
-            product.ProductName = productname;
+            product.ProductName = name;
 
             product.Brand = _context.Brands.Find(brandId);
             product.Category = _context.Categories.Find(categoryId);

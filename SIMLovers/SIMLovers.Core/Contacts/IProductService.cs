@@ -10,13 +10,14 @@ namespace SIMLovers.Core.Contacts
 {
     public interface IProductService
     {
-        bool Create(string productname, int brandId, int categoryId, string description, int torque, string style, string picture, int quantity, decimal price, decimal discount);
-        bool Update(int productId, string productname, int brandId, int categoryId, string description, int torque, string style, string picture, int quantity, decimal price, decimal discount);
+        bool Create(string name, int brandId, int categoryId, string description, int torque, string style, string picture, int quantity, decimal price, decimal discount);
+        bool Update(int productId, string name, int brandId, int categoryId, string description, int torque, string style, string picture, int quantity, decimal price, decimal discount);
 
         List<Product> GetProducts();
 
         Product GetProductById(int productId);
         bool RemoveById(int productId);
         List<Product> GetProducts(string searchStringCategoryName, string searchStringBrandName);
+        
     }
 }
