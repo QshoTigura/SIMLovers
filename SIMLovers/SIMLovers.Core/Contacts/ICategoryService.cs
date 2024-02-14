@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using SIMLovers.Infrastructure.Data.Domain;
 
-namespace SIMLovers.Core.Contracts
+namespace SIMLovers.Core.Contacts
 {
     public interface ICategoryService
     {

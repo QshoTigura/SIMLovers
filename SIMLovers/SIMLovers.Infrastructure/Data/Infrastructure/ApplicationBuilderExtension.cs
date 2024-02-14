@@ -37,11 +37,11 @@ namespace SIMLovers.Infrastructure.Data.Infrastructure
             }
             dataCategory.Categories.AddRange(new[]
             {
-                new Category{CategoryName="Bases"},
-                new Category{CategoryName="Wheels"},
-                new Category{CategoryName="Pedals"},
-                new Category{CategoryName="Accessory"},
-            });
+            new Category{CategoryName="Bases"},
+            new Category{CategoryName="Wheels"},
+            new Category{CategoryName="Pedals"},
+            new Category{CategoryName="Accessory"}
+        });
             dataCategory.SaveChanges();
         }
         private static void SeedBrands(ApplicationDbContext dataBrand)
@@ -52,13 +52,11 @@ namespace SIMLovers.Infrastructure.Data.Infrastructure
             }
             dataBrand.Brands.AddRange(new[]
             {
-                new Brand{BrandName="Fanatec"},
-                new Brand{BrandName="Moza"},
-                new Brand{BrandName="Simagic"},
-                new Brand{BrandName="Simucube"},
-                new Brand{BrandName="Cammus"},
-                new Brand{BrandName="Thrustmaster"},
-            });
+            new Brand{BrandName="Fanatec"},
+            new Brand{BrandName="Simagic"},
+            new Brand{BrandName="Simucube"},
+            new Brand{BrandName="Moza"}
+        });
             dataBrand.SaveChanges();
         }
 
@@ -66,7 +64,7 @@ namespace SIMLovers.Infrastructure.Data.Infrastructure
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            string[] roleNames = { "QshoChuk", "Client" };
+            string[] roleNames = { "Administrator", "Client" };
             IdentityResult roleResult;
             foreach (var role in roleNames)
             {
@@ -92,11 +90,11 @@ namespace SIMLovers.Infrastructure.Data.Infrastructure
                 user.Address = "admin address";
                 user.PhoneNumber = "0888888888";
 
-                var result = await userManager.CreateAsync(user, "QshoTigur");
+                var result = await userManager.CreateAsync(user, "Admin123456");
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, "QshoChuk").Wait();
+                    userManager.AddToRoleAsync(user, "Administrator").Wait();
                 }
             }
         }

@@ -23,8 +23,6 @@ namespace SIMLovers.Infrastructure.Data.Domain
         [MaxLength(10)]
         public string Style { get; set; } = null!;
 
-
-
         [Required]
         [ForeignKey(nameof(Brand))]
         public int BrandId { get; set; }

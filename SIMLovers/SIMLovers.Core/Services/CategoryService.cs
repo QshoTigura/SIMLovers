@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using SIMLovers.Core.Contracts;
+using SIMLovers.Core.Contacts;
 using SIMLovers.Infrastructure.Data;
 using SIMLovers.Infrastructure.Data.Domain;
 
@@ -31,7 +31,7 @@ namespace SIMLovers.Core.Services
         public List<Product> GetProductsByCategory(int categoryId)
         {
             return _context.Products
-                .Where(x => x.CategoryId == categoryId).ToList();
+               .Where(x => x.CategoryId == categoryId).ToList();
         }
     }
 }

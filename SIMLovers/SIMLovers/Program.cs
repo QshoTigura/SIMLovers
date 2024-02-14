@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-using SIMLovers.Core.Contracts;
+using SIMLovers.Core.Contacts;
 using SIMLovers.Core.Services;
 using SIMLovers.Infrastructure.Data;
 using SIMLovers.Infrastructure.Data.Domain;
+using SIMLovers.Infrastructure.Data.Infrastructure;
 
 namespace SIMLovers.Infrastructure.Data;
 
@@ -30,13 +31,16 @@ public class Program
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequiredLength = 5;
         })
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
         builder.Services.AddControllersWithViews();
 
         builder.Services.AddTransient<ICategoryService, CategoryService>();
         builder.Services.AddTransient<IBrandService, BrandService>();
+        builder.Services.AddTransient<IProductService, ProductService>();
 
         var app = builder.Build();
+        app.PrepareDatabase();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

@@ -28,6 +28,7 @@ namespace SIMLovers.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
+
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
@@ -39,26 +40,27 @@ namespace SIMLovers.Areas.Identity.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
+
         public string ReturnUrl { get; set; }
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public class InputModel
         {
             [Required]
-            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and max {1} long.",MinimumLength =2 )]
-            [Display(Name="First Name")]
+            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
             [Required]
-            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and max {1} long.", MinimumLength = 2)]
+            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
             [Required]
-            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and max {1} long.", MinimumLength = 3)]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             [Display(Name = "Address")]
             public string Address { get; set; }
+
             [Required]
             [Display(Name = "UserName")]
             public string UserName { get; set; }
@@ -68,11 +70,13 @@ namespace SIMLovers.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
+
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
@@ -97,13 +101,14 @@ namespace SIMLovers.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    Address = Input.Address,
+                    Address = Input.Address
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
@@ -113,31 +118,21 @@ namespace SIMLovers.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
 
-      // private IdentityUser CreateUser()
-      // {
-      //     try
-      //     {
-      //         return Activator.CreateInstance<IdentityUser>();
-      //     }
-      //     catch
-      //     {
-      //         throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-      //             $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-      //             $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
-      //     }
-      // }
-      //
-      // private IUserEmailStore<IdentityUser> GetEmailStore()
-      // {
-      //     if (!_userManager.SupportsUserEmail)
-      //     {
-      //         throw new NotSupportedException("The default UI requires a user store with email support.");
-      //     }
-      //     return (IUserEmailStore<ApplicationUser>)_userStore;
-      // }
+        /*  private ApplicationUser CreateUser()
+          {
+              try
+              {
+                  return Activator.CreateInstance<ApplicationUser>();
+              }
+              catch
+              {
+                  throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+                      $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                      $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+              }
+          }*/
     }
 }
