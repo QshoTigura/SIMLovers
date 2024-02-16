@@ -16,6 +16,9 @@ namespace SIMLovers.Infrastructure.Data.Domain
         [MaxLength(30)]
         public string ProductName { get; set; } = null!;
 
+        [Required]
+        [MaxLength(250)]
+        public string Description { get; set; }=null!;
         
         [Range(1, 30)]
         public int Torque { get; set; }
@@ -35,9 +38,6 @@ namespace SIMLovers.Infrastructure.Data.Domain
 
         public string Picture { get; set; } = null!;
 
-        [Required]
-        [MaxLength(250)]
-        public string Description { get; set; }=null!;
 
         [Range(0, 5000)]
         public int Quantity { get; set; }

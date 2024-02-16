@@ -18,6 +18,5 @@ namespace SIMLovers.Core.Contacts
         Product GetProductById(int productId);
         bool RemoveById(int productId);
         List<Product> GetProducts(string searchStringCategoryName, string searchStringBrandName);
-        
     }
 }

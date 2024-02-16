@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using SIMLovers.Core.Contacts;
@@ -9,6 +10,7 @@ using SIMLovers.Models.Product;
 
 namespace SIMLovers.Controllers
 {
+    [Authorize(Roles= "Administrator")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -22,15 +24,55 @@ namespace SIMLovers.Controllers
             this._brandService = brandService;
         }
         // GET: ProductController
-        public ActionResult Index()
+        [AllowAnonymous]
+        public ActionResult Index(string searchStringCategoryName, string searchStringBrandName)
         {
-            return View();
+            List<ProductIndexVM> products = _productService.GetProducts(searchStringCategoryName, searchStringBrandName)
+                 .Select(products => new ProductIndexVM
+                 {
+                     Id = products.Id,
+                     ProductName = products.ProductName,
+                     BrandId = products.BrandId,
+                     BrandName = products.Brand.BrandName,
+                     CategoryId = products.CategoryId,
+                     CategoryName = products.Category.CategoryName,
+                     Description = products.Description,
+                     Torque=products.Torque,
+                     Style=products.Style,
+                     Picture = products.Picture,
+                     Quantity = products.Quantity,
+                     Price = products.Price,
+                     Discount = products.Discount,
+                 }).ToList();
+            return this.View(products);
         }
 
         // GET: ProductController/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
-            return View();
+            Product item = _productService.GetProductById(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            ProductDetailsVM product = new ProductDetailsVM()
+            {
+                Id = item.Id,
+                ProductName = item.ProductName,
+                BrandId = item.BrandId,
+                BrandName = item.Brand.BrandName,
+                CategoryId = item.Id,
+                CategoryName = item.Category.CategoryName,
+                Description= item.Description,
+                Torque=item.Torque,
+                Style= item.Style,
+                Picture = item.Picture,
+                Quantity = item.Quantity,
+                Price = item.Price,
+                Discount = item.Discount
+            };
+            return View(product);
         }
 
         // GET: ProductController/Create
@@ -73,28 +115,83 @@ namespace SIMLovers.Controllers
         // GET: ProductController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Product product = _productService.GetProductById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            ProductEditVM updatedProduct = new ProductEditVM()
+            {
+                Id = product.Id,
+                ProductName = product.ProductName,
+                BrandId = product.BrandId,
+                CategoryId = product.CategoryId,
+                Description = product.Description,
+                Torque = product.Torque,
+                Style = product.Style,
+                Picture = product.Picture,
+                Quantity = product.Quantity,
+                Price = product.Price,
+                Discount = product.Discount
+            };
+            updatedProduct.Brands = _brandService.GetBrands()
+                .Select(b => new BrandPairVM()
+                {
+                    Id = b.Id,
+                    Name = b.BrandName
+                }).ToList();
+            updatedProduct.Categories = _categoryService.GetCategories()
+                .Select(c => new CategoryPairVM()
+                {
+                    Id = c.Id,
+                    Name = c.CategoryName
+                }).ToList();
+            return View(updatedProduct);
         }
 
         // POST: ProductController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ProductEditVM product)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var updated = _productService.Update(id, product.ProductName, product.BrandId, product.CategoryId, product.Description, product.Torque, product.Style, product.Picture,
+                    product.Quantity, product.Price, product.Discount);
+                if (updated)
+                {
+                    return this.RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(product);
         }
 
         // GET: ProductController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Product item = _productService.GetProductById(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            ProductDeleteVM product = new ProductDeleteVM()
+            {
+                Id = item.Id,
+                ProductName = item.ProductName,
+                BrandId = item.BrandId,
+                BrandName = item.Brand.BrandName,
+                CategoryId = item.Id,
+                CategoryName = item.Category.CategoryName,
+                Description = item.Description,
+                Torque = item.Torque,
+                Style = item.Style,
+                Picture = item.Picture,
+                Quantity = item.Quantity,
+                Price = item.Price,
+                Discount = item.Discount
+            };
+            return View(product);
         }
 
         // POST: ProductController/Delete/5
@@ -102,14 +199,20 @@ namespace SIMLovers.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
+            var deleted = _productService.RemoveById(id);
+
+            if (deleted)
             {
-                return RedirectToAction(nameof(Index));
+                return this.RedirectToAction("Success");
             }
-            catch
+            else
             {
                 return View();
             }
+        }
+        public IActionResult Success()
+        {
+            return View();
         }
     }
 }
