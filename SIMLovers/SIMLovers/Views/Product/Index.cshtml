@@ -3,122 +3,37 @@
     ViewData["Title"] = "Index";
 }
 <h1>Index</h1>
-@if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
-{
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
+<p>
+    <a asp-action="Create" style="color:black; text-decoration:none;">Create New</a>
+</p>
+
 <form asp-controller="Product" asp-action="Index" method="get">
     <p>
-        Brand: <input type="text" name="SearchStringBrandName" />  
+        Brand: <input type="text" name="SearchStringBrandName" />
         Category: <input type="text" name="SearchStringCategoryName" />
-
         <input type="submit" value="Filter" />
     </p>
 </form>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.BrandId)
-            13
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.BrandName)
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Torque)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Style)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discount)
-            </th>
-
-        </tr>
-    </thead>
-    <tbody>
+<div style="display:flex; flex-direction:row;max-width: 650px;">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                @*<td>
-            @Html.DisplayFor(modelItem => item.BrandId)
-            </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.BrandName)
-                </td>
-                @*<td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryName)
-                </td>
-                <th>
-                    @Html.DisplayNameFor(modelItem => item.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(modelItem => item.Torque)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(modelItem => item.Style)
-                </th>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item.Picture)" alt="Image" width="100" />
-                    @*@Html.DisplayFor(modelItem => item.Pictute)*@
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Discount) %
-                </td>
+        <a asp-action="Details" asp-route-id="@item.Id" style="color:black;text-decoration:none;">
+            <div class="card" style="color:black;text-decoration:none;flex:1;">
+                    <img class="card img top" src="@item.Picture" alt="pic" style="max-width:100px;margin:auto;border:none">
+                    <div class="card-body text-center">
+                        <h4>@item.BrandName</h4>
+                        <h6>@item.ProductName</h6>
+                        <h6>Price: <b>@item.Price</b></h6>
 
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a>
-                    @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
-                    {
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                    }
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
 
-                    @if (this.User.Identity.IsAuthenticated)
-                    {
-                        <a asp-action="Create" asp-controller="Order" asp-route-id="@item.Id" class="btn btn-warning">Order</a>
-                    }
-                </td>
-            </tr>
+
+                    </div>
+                </div>
+            </a>
         }
-    </tbody>
-</table>
+</div>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

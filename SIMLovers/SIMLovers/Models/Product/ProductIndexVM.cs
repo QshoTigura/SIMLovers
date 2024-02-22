@@ -24,10 +24,10 @@ namespace SIMLovers.Models.Product
         [Display(Name = "Description")]
         public string Description { get; set; } = null!;
 
-        [Display(Name = "Torque")]
+
         public int Torque { get; set; }
 
-        [Display(Name = "Style")]
+
         public string Style { get; set; } = null!;
 
         [Display(Name = "Picture")]

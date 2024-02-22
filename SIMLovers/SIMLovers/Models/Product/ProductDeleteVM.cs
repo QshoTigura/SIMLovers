@@ -20,6 +20,7 @@ namespace SIMLovers.Models.Product
         [Display(Name = "Category")]
         public string CategoryName { get; set; } = null!;
 
+        [Display(Name = "Description")]
         public string Description { get; set; }=null!;
 
         public int Torque {  get; set; }

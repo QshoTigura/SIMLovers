@@ -18,13 +18,13 @@ namespace SIMLovers.Models.Product
         [Display(Name = "Category")]
         public string CategoryName { get; set; } = null!;
 
-        [Display(Name ="Description")]
+        [Display(Name = "Description")]
         public string Description { get; set; }= null!;
 
-        [Display(Name ="Torque")]
+
         public int Torque {  get; set; }
 
-        [Display(Name ="Style")]
+
         public string Style {  get; set; } = null!;
 
         [Display(Name = "Picture")]
