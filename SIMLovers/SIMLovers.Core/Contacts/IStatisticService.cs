@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SIMLovers.Core.Contacts
 {
-    public interface IStatisticsService
+    public interface IStatisticService
     {
         int CountProducts();
         int CountClients();

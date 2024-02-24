@@ -4,11 +4,11 @@ using SIMLovers.Models.Statistic;
 
 namespace SIMLovers.Controllers
 {
-    public class StatisticsController : Controller
+    public class StatisticController : Controller
     {
-       private readonly IStatisticsService statisticsService;
+       private readonly IStatisticService statisticsService;
 
-        public StatisticsController(IStatisticsService statisticsService)
+        public StatisticController(IStatisticService statisticsService)
         {
             this.statisticsService = statisticsService;
         }
@@ -26,3 +26,4 @@ namespace SIMLovers.Controllers
         }
     }
 }
+    

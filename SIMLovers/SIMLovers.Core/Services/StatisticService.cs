@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace SIMLovers.Core.Services
 {
-    public class StatisticsService : IStatisticsService
+    public class StatisticService : IStatisticService
     {
         private readonly ApplicationDbContext _context;
-        public StatisticsService(ApplicationDbContext context)
+        public StatisticService(ApplicationDbContext context)
         {
             _context = context;
         }
