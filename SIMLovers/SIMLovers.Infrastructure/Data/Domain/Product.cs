@@ -25,8 +25,8 @@ namespace SIMLovers.Infrastructure.Data.Domain
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; } = null!;
-        [Required]
-        [MaxLength(2500)]
+
+        [MaxLength(10000)]
         public string Description { get; set; } = null!;
         
         [Range(1, 30)]
@@ -35,9 +35,7 @@ namespace SIMLovers.Infrastructure.Data.Domain
         [MaxLength(100)]
         public string Style { get; set; } = null!;
 
-
         public string Picture { get; set; } = null!;
-
 
         [Range(0, 5000)]
         public int Quantity { get; set; }

@@ -21,9 +21,7 @@ namespace SIMLovers.Models.Product
         [Display(Name = "Description")]
         public string Description { get; set; }= null!;
 
-
         public int Torque {  get; set; }
-
 
         public string Style {  get; set; } = null!;
 

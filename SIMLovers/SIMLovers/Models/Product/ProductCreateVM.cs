@@ -24,17 +24,14 @@ namespace SIMLovers.Models.Product
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public virtual List<CategoryPairVM> Categories { get; set; } = new List<CategoryPairVM>();
-        [Required]
+
         [Display(Name = "Description")]
         public string Description { get; set; } = null!;
 
-
         public int Torque { get; set; }
-
 
         public string Style { get; set; } = null!;
 
- 
         [Display(Name = "Picture")]
         public string Picture { get; set; } = null!;
 
